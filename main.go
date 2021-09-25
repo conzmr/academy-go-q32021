@@ -1,10 +1,11 @@
 package main
 
 import (
-	"academy-go-q32021/academy-go-q32021/registry"
-	"academy-go-q32021/academy-go-q32021/router"
 	"fmt"
 	"log"
+
+	"github.com/conzmr/academy-go-q32021/registry"
+	"github.com/conzmr/academy-go-q32021/router"
 
 	"github.com/labstack/echo"
 )
