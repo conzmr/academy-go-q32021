@@ -9,6 +9,7 @@ type coachPresenter struct {
 
 type CoachPresenter interface {
 	ResponseCoaches(cs []*model.Coach) []*model.Coach
+	ResponseCoach(c *model.Coach) *model.Coach
 }
 
 func NewCoachPresenter() CoachPresenter {
@@ -20,4 +21,9 @@ func (cp *coachPresenter) ResponseCoaches(cs []*model.Coach) []*model.Coach {
 		c.Name = "Coach:" + c.Name
 	}
 	return cs
+}
+
+func (cp *coachPresenter) ResponseCoach(c *model.Coach) *model.Coach {
+	c.Name = "Coach: " + c.Name
+	return c
 }

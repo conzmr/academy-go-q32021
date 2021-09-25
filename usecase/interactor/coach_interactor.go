@@ -14,6 +14,7 @@ type coachInteractor struct {
 
 type CoachInteractor interface {
 	Get(c []*model.Coach) ([]*model.Coach, error)
+	GetById(id string) (*model.Coach, error)
 }
 
 func NewCoachInteractor(r repository.CoachRepository, p presenter.CoachPresenter) CoachInteractor {
@@ -27,4 +28,13 @@ func (cs *coachInteractor) Get(c []*model.Coach) ([]*model.Coach, error) {
 	}
 
 	return cs.CoachPresenter.ResponseCoaches(c), nil
+}
+
+func (cs *coachInteractor) GetById(id string) (*model.Coach, error) {
+	c, err := cs.CoachRepository.FindById(id)
+	if err != nil {
+		return nil, err
+	}
+
+	return cs.CoachPresenter.ResponseCoach(c), nil
 }
