@@ -1,6 +1,7 @@
 package interactor
 
 import (
+	"academy-go-q32021/academy-go-q32021/domain/model"
 	"errors"
 
 	"github.com/conzmr/academy-go-q32021/domain/model"
@@ -29,10 +30,10 @@ func (us *coachInteractor) Get(u []*model.Coach) ([]*model.Coach, error) {
 		return nil, err
 	}
 
-	return us.CoachPresenter.ResponseUsers(u), nil
+	return us.CoachPresenter.ResponseCoaches(u), nil
 }
 
-func (c *coachInteractor) Create(u *model.User) (*model.User, error) {
+func (c *coachInteractor) Create(u *model.Coach) (*model.Coach, error) {
 	data, err := c.DBRepository.Transaction(func(i interface{}) (interface{}, error) {
 		c, err := c.CoachRepository.Create(c)
 
