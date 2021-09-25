@@ -1,21 +1,18 @@
 package registry
 
 import (
-	controller "academy-go-q32021/academy-go-q32021/interface/controllers"
-
-	"github.com/jinzhu/gorm"
+	controller "github.com/conzmr/academy-go-q32021/interface/controllers"
 )
 
 type registry struct {
-	db *gorm.DB
 }
 
 type Registry interface {
 	NewAppController() controller.AppController
 }
 
-func NewRegistry(db *gorm.DB) Registry {
-	return &registry{db}
+func NewRegistry() Registry {
+	return &registry{}
 }
 
 func (r *registry) NewAppController() controller.AppController {

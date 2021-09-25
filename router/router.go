@@ -1,7 +1,7 @@
 package router
 
 import (
-	controller "academy-go-q32021/academy-go-q32021/interface/controllers"
+	controller "github.com/conzmr/academy-go-q32021/interface/controllers"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"

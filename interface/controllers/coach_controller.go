@@ -19,13 +19,13 @@ func NewCoachController(c interactor.CoachInteractor) CoachController {
 	return &coachController{c}
 }
 
-func (cc *coachController) GetCoaches(ctx Context) error {
-	var c []*model.Coach
+func (cc *coachController) GetCoaches(c Context) error {
+	var co []*model.Coach
 
-	c, err := cc.coachInteractor.Get(c)
+	co, err := cc.coachInteractor.Get(co)
 	if err != nil {
 		return err
 	}
 
-	return ctx.JSON(http.StatusOK, c)
+	return c.JSON(http.StatusOK, co)
 }

@@ -1,17 +1,17 @@
 package presenter
 
 import (
-	"academy-go-q32021/academy-go-q32021/domain/model"
+	"github.com/conzmr/academy-go-q32021/domain/model"
 )
 
 type coachPresenter struct {
 }
 
 type CoachPresenter interface {
-	ResponseCoaches(us []*model.Coach) []*model.Coach
+	ResponseCoaches(cs []*model.Coach) []*model.Coach
 }
 
-func NewUserPresenter() CoachPresenter {
+func NewCoachPresenter() CoachPresenter {
 	return &coachPresenter{}
 }
 
