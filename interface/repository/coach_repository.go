@@ -2,7 +2,6 @@ package repository
 
 import (
 	"encoding/csv"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -37,16 +36,9 @@ func (cr *coachRepository) FindAll(c []*model.Coach) ([]*model.Coach, error) {
 		log.Fatal(err)
 	}
 	return coaches, nil
-
-	if err != nil {
-		return nil, err
-	}
-
-	return c, nil
 }
 
 func (cr *coachRepository) FindById(id string) (*model.Coach, error) {
-	fmt.Println("Message hee")
 	coachFile, err := os.Open("./datastore/coach.csv")
 	if err != nil {
 		return nil, err

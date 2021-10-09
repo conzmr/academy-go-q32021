@@ -13,6 +13,7 @@ func NewRouter(e *echo.Echo, c controller.AppController) *echo.Echo {
 
 	e.GET("/coaches", func(context echo.Context) error { return c.GetCoaches(context) })
 	e.GET("/coaches/:id", func(context echo.Context) error { return c.GetCoach(context) })
+	e.GET("/exercises", func(context echo.Context) error { return c.GetExercises(context) })
 
 	return e
 }
