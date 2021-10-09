@@ -1,9 +1,14 @@
 package model
 
+import (
+	"strconv"
+)
+
 type Exercise struct {
-	Id          int    `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
+	Id   int    `json:"id"`
+	Name string `json:"name"`
 }
 
-func (Exercise) TableName() string { return "exercises" }
+func (e Exercise) ToCSV() []string {
+	return []string{strconv.Itoa(e.Id), e.Name}
+}

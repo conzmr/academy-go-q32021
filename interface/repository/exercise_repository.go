@@ -1,10 +1,12 @@
 package repository
 
 import (
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 
 	"github.com/conzmr/academy-go-q32021/domain/model"
 )
@@ -21,7 +23,6 @@ type exerciseRepository struct {
 
 type ExerciseRepository interface {
 	FindAll(c []*model.Exercise) ([]*model.Exercise, error)
-	// Save(c []*model.Exercise) ([]*model.Exercise, error)
 }
 
 func NewExerciseRepository() ExerciseRepository {
@@ -48,5 +49,24 @@ func (er *exerciseRepository) FindAll(c []*model.Exercise) ([]*model.Exercise, e
 		return nil, err
 	}
 	exercises := exercisesRes.Results
+
+	csvfile, err := os.OpenFile("./datastore/exercises.csv", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return nil, err
+	}
+	defer csvfile.Close()
+
+	writer := csv.NewWriter(csvfile)
+	defer writer.Flush()
+
+	for _, record := range exercises {
+		err := writer.Write(record.ToCSV())
+		if err != nil {
+			fmt.Println("Error:", err)
+			return nil, err
+		}
+	}
+
 	return exercises, nil
 }
