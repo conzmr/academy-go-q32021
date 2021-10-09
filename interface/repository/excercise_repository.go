@@ -9,16 +9,11 @@ import (
 	"github.com/conzmr/academy-go-q32021/domain/model"
 )
 
-const (
-	endpoint                = "https://api.openweathermap.org/data/2.5"
-	pathFormatWeatherByCity = "/weather?q=%s&appid=%s&units=metric"
-)
-
 type ExerciseResponse struct {
 	Count    int               `json:"count"`
 	Next     string            `json:"next"`
 	Previous string            `json:"previous"`
-	Results  []*model.Exercise `json:"exercises"`
+	Results  []*model.Exercise `json:"results"`
 }
 
 type exerciseRepository struct {
@@ -39,23 +34,19 @@ func (er *exerciseRepository) FindAll(c []*model.Exercise) ([]*model.Exercise, e
 
 	res, err := http.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("openweather.GetWeatherByCity failed http GET: %s", err)
+		return nil, err
 	}
 	defer res.Body.Close()
 
-	// read the response body and encode it into the respose struct
 	bodyRaw, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return nil, fmt.Errorf("openweather.GetWeatherByCity failed reading body: %s", err)
+		return nil, err
 	}
-
 	var exercisesRes ExerciseResponse
-	exercises := []*model.Exercise{}
 
 	if err = json.Unmarshal(bodyRaw, &exercisesRes); err != nil {
-		return nil, fmt.Errorf("openweather.GetWeatherByCity failed encoding body: %s", err)
+		return nil, err
 	}
-
-	exercises = exercisesRes.Results
+	exercises := exercisesRes.Results
 	return exercises, nil
 }

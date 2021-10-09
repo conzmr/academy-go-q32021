@@ -1,9 +1,9 @@
 package model
 
 type Exercise struct {
-	Id          int
-	Name        string
-	Description string
+	Id          int    `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 func (Exercise) TableName() string { return "exercises" }
