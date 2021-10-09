@@ -17,13 +17,9 @@ func NewCoachPresenter() CoachPresenter {
 }
 
 func (cp *coachPresenter) ResponseCoaches(cs []*model.Coach) []*model.Coach {
-	for _, c := range cs {
-		c.Name = "Coach:" + c.Name
-	}
 	return cs
 }
 
 func (cp *coachPresenter) ResponseCoach(c *model.Coach) *model.Coach {
-	c.Name = "Coach: " + c.Name
 	return c
 }
