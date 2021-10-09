@@ -11,9 +11,9 @@ func NewRouter(e *echo.Echo, c controller.AppController) *echo.Echo {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.GET("/coaches", func(context echo.Context) error { return c.GetCoaches(context) })
-	e.GET("/coaches/:id", func(context echo.Context) error { return c.GetCoach(context) })
-	e.GET("/exercises", func(context echo.Context) error { return c.GetExercises(context) })
+	e.GET("/coaches", func(context echo.Context) error { return c.Coach.GetCoaches(context) })
+	e.GET("/coaches/:id", func(context echo.Context) error { return c.Coach.GetCoach(context) })
+	e.GET("/exercises", func(context echo.Context) error { return c.Exercise.GetExercises(context) })
 
 	return e
 }

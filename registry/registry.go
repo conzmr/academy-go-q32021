@@ -16,5 +16,8 @@ func NewRegistry() Registry {
 }
 
 func (r *registry) NewAppController() controller.AppController {
-	return r.NewCoachController()
+	return controller.AppController{
+		Coach:    r.NewCoachController(),
+		Exercise: r.NewExerciseController(),
+	}
 }

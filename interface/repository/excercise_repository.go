@@ -25,7 +25,7 @@ type exerciseRepository struct {
 }
 
 type ExerciseRepository interface {
-	FindAll(c []*model.Exercise, limit int) ([]*model.Exercise, error)
+	FindAll(c []*model.Exercise) ([]*model.Exercise, error)
 	// Save(c []*model.Exercise) ([]*model.Exercise, error)
 }
 
@@ -33,9 +33,9 @@ func NewExerciseRepository() ExerciseRepository {
 	return &exerciseRepository{}
 }
 
-func (er *exerciseRepository) FindAll(c []*model.Exercise, limit int) ([]*model.Exercise, error) {
+func (er *exerciseRepository) FindAll(c []*model.Exercise) ([]*model.Exercise, error) {
 
-	url := fmt.Sprintf("https://wger.de/api/v2/exercise/?format=json&limit=%d", limit)
+	url := fmt.Sprintf("https://wger.de/api/v2/exercise/?format=json&limit=%d", 10)
 
 	res, err := http.Get(url)
 	if err != nil {

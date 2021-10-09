@@ -1,6 +1,6 @@
 package controller
 
-type AppController interface {
-	CoachController
-	ExerciseController
+type AppController struct {
+	Coach    interface{ CoachController }
+	Exercise interface{ ExerciseController }
 }
