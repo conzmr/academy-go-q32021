@@ -6,5 +6,4 @@ import (
 
 type ExerciseRepository interface {
 	FindAll(exs []*model.Exercise) ([]*model.Exercise, error)
-	// SaveAll(exs []*model.Exercise) (string, error)
 }
