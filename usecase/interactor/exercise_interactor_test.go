@@ -36,6 +36,11 @@ func (mr MockRepo) FindAll(exs []*model.Exercise) ([]*model.Exercise, error) {
 	return args.Get(0).([]*model.Exercise), args.Error(1)
 }
 
+func (mr MockRepo) Sync(exs []*model.Exercise) ([]*model.Exercise, error) {
+	args := mr.Called()
+	return args.Get(0).([]*model.Exercise), args.Error(1)
+}
+
 func (mp MockPresenter) ResponseExercises(c []*model.Exercise) []*model.Exercise {
 	args := mp.Called()
 	return args.Get(0).([]*model.Exercise)

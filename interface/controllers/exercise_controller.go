@@ -13,6 +13,7 @@ type exerciseController struct {
 
 type ExerciseController interface {
 	GetExercises(c Context) error
+	SyncExercises(c Context) error
 }
 
 func NewExerciseController(e interactor.ExerciseInteractor) ExerciseController {
@@ -20,6 +21,17 @@ func NewExerciseController(e interactor.ExerciseInteractor) ExerciseController {
 }
 
 func (ec *exerciseController) GetExercises(c Context) error {
+	var e []*model.Exercise
+
+	e, err := ec.exerciseInteractor.Get(e)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, e)
+}
+
+func (ec *exerciseController) SyncExercises(c Context) error {
 	var e []*model.Exercise
 
 	e, err := ec.exerciseInteractor.Get(e)
