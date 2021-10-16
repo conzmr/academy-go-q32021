@@ -16,10 +16,12 @@ type CoachController interface {
 	GetCoach(c Context) error
 }
 
+// Returns a CoachController
 func NewCoachController(c interactor.CoachInteractor) CoachController {
 	return &coachController{c}
 }
 
+// Calls coachInteractor get method
 func (cc *coachController) GetCoaches(c Context) error {
 	var co []*model.Coach
 
@@ -31,6 +33,7 @@ func (cc *coachController) GetCoaches(c Context) error {
 	return c.JSON(http.StatusOK, co)
 }
 
+// Calls coachInteractor get by id
 func (cc *coachController) GetCoach(c Context) error {
 	var co *model.Coach
 

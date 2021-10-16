@@ -32,10 +32,12 @@ type ExerciseRepository interface {
 	FindAll(c []*model.Exercise, typeId string, items int, itemsPerWorkers int) ([]*model.Exercise, error)
 }
 
+// Returns an ExerciseRepository
 func NewExerciseRepository() ExerciseRepository {
 	return &exerciseRepository{}
 }
 
+// Returns a determined number of exercises reading them from exercise csv concurrently using a worker pool
 func (er *exerciseRepository) FindAll(c []*model.Exercise, typeId string, items int, itemsPerWorkers int) ([]*model.Exercise, error) {
 	f, err := os.Open(file)
 	if err != nil {
@@ -100,6 +102,7 @@ func (er *exerciseRepository) FindAll(c []*model.Exercise, typeId string, items 
 	return rs, nil
 }
 
+// Consumes Wger API and stores the information obtained in the exercises CSV file
 func (er *exerciseRepository) Sync(c []*model.Exercise) ([]*model.Exercise, error) {
 
 	url := fmt.Sprintf("https://wger.de/api/v2/exercise/?format=json&limit=%d", 10)

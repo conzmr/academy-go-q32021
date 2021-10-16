@@ -17,10 +17,12 @@ type CoachInteractor interface {
 	GetById(id string) (*model.Coach, error)
 }
 
+// Returns a CoachInteractor
 func NewCoachInteractor(r repository.CoachRepository, p presenter.CoachPresenter) CoachInteractor {
 	return &coachInteractor{r, p}
 }
 
+// Calls FindAll method from CoachRepository and handles its response with ResponseCoaches from CoachPresenter
 func (cs *coachInteractor) Get(c []*model.Coach) ([]*model.Coach, error) {
 	c, err := cs.CoachRepository.FindAll(c)
 	if err != nil {
@@ -30,6 +32,7 @@ func (cs *coachInteractor) Get(c []*model.Coach) ([]*model.Coach, error) {
 	return cs.CoachPresenter.ResponseCoaches(c), nil
 }
 
+// Calls FindById method from CoachRepository and handles its response with ResponseCoach from CoachPresenter
 func (cs *coachInteractor) GetById(id string) (*model.Coach, error) {
 	c, err := cs.CoachRepository.FindById(id)
 	if err != nil {

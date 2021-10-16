@@ -18,10 +18,12 @@ type ExerciseController interface {
 	SyncExercises(c Context) error
 }
 
+// Returns ExerciseController
 func NewExerciseController(e interactor.ExerciseInteractor) ExerciseController {
 	return &exerciseController{e}
 }
 
+// Validate query params from given context and calls ExerciseInteractor Get method
 func (ec *exerciseController) GetExercises(c Context) error {
 	idType := c.QueryParam("type")
 	items := c.QueryParam("items")
@@ -54,6 +56,7 @@ func (ec *exerciseController) GetExercises(c Context) error {
 	return c.JSON(http.StatusOK, e)
 }
 
+// Calls ExerciseInteractor Sync method
 func (ec *exerciseController) SyncExercises(c Context) error {
 	var e []*model.Exercise
 

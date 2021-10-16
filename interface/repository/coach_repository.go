@@ -20,10 +20,12 @@ type CoachRepository interface {
 	FindById(id string) (*model.Coach, error)
 }
 
+// Returns a CoachRepository
 func NewCoachRepository() CoachRepository {
 	return &coachRepository{}
 }
 
+// Reads coach data from file, parses the content and returns it
 func (cr *coachRepository) FindAll(c []*model.Coach) ([]*model.Coach, error) {
 	coachFile, err := os.OpenFile("./datastore/coach.csv", os.O_RDWR|os.O_CREATE, os.ModePerm)
 	if err != nil {
@@ -38,6 +40,7 @@ func (cr *coachRepository) FindAll(c []*model.Coach) ([]*model.Coach, error) {
 	return coaches, nil
 }
 
+// Looks for data related to a coach with the given id, parses and returns it
 func (cr *coachRepository) FindById(id string) (*model.Coach, error) {
 	coachFile, err := os.Open("./datastore/coach.csv")
 	if err != nil {

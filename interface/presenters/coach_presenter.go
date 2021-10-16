@@ -12,14 +12,17 @@ type CoachPresenter interface {
 	ResponseCoach(c *model.Coach) *model.Coach
 }
 
+// Returns an CoachPresenter
 func NewCoachPresenter() CoachPresenter {
 	return &coachPresenter{}
 }
 
+// Handles coach data before passing it to view
 func (cp *coachPresenter) ResponseCoaches(cs []*model.Coach) []*model.Coach {
 	return cs
 }
 
+// Handles coaches data before passing it to view
 func (cp *coachPresenter) ResponseCoach(c *model.Coach) *model.Coach {
 	return c
 }
