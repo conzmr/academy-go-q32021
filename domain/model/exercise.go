@@ -5,8 +5,8 @@ import (
 )
 
 type Exercise struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
+	Id   int    `json:"id" csv:"Id"`
+	Name string `json:"name" csv:"Name"`
 }
 
 func (e Exercise) ToCSV() []string {
